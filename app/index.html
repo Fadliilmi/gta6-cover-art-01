@@ -3,21 +3,88 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cover Snap</title>
+<title>Neon Coast — Vice City-style Cover Maker</title>
 <link rel="stylesheet" href="./style.css">
 </head>
 <body>
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark" aria-hidden="true">NC</span>
+    <div>
+      <h1>Neon Coast Cover Studio</h1>
+      <p>Turn your photos into a Vice City sunset poster — offline, on your machine.</p>
+    </div>
+  </div>
+  <div class="top-actions">
+    <button id="undo" type="button" disabled>↶ Undo</button>
+    <button id="redo" type="button" disabled>↷ Redo</button>
+  </div>
+</header>
+
 <main class="app">
-  <section class="controls">
-    <h1>Cover Snap</h1>
-    <p>A photo and a caption, made into a square cover.</p>
-    <label>Photo <input id="photo" type="file" accept="image/*"></label>
-    <label>Caption <input id="caption" type="text" maxlength="40" value="Sunset Heist"></label>
-    <button id="export" type="button">Export PNG 1080 x 1080</button>
-    <p id="status" role="status"></p>
+  <section class="stage">
+    <canvas id="preview" width="700" height="700" aria-label="Live cover preview"></canvas>
+    <p class="hint">Click a panel to select it · drag the photo to move it · scroll over a panel to zoom · Ctrl+Z undoes</p>
+    <div class="panelbar-row">
+      <span id="panel-label">Panel 1 of 4</span>
+      <div id="panelbar" role="group" aria-label="Pick a panel"></div>
+      <button id="next-photo" type="button">Next photo</button>
+      <button id="fill-all" type="button">Fill all panels</button>
+      <button id="reset-crop" type="button">Reset crop</button>
+    </div>
   </section>
-  <canvas id="cover" width="1080" height="1080" aria-label="The cover"></canvas>
+
+  <aside class="controls">
+    <section class="group">
+      <h2>1 · Photos</h2>
+      <label class="upload">Add your photos
+        <input id="photo" type="file" accept="image/*" multiple>
+      </label>
+      <div id="thumbs" class="thumbs"></div>
+      <p class="note">Photos never leave your machine. Click a thumbnail to put that photo in the selected panel.</p>
+    </section>
+
+    <section class="group">
+      <h2>2 · Layout</h2>
+      <div id="layouts" class="choices"></div>
+    </section>
+
+    <section class="group">
+      <h2>3 · Colour grade</h2>
+      <div id="grades" class="choices grades"></div>
+    </section>
+
+    <section class="group">
+      <h2>4 · Caption</h2>
+      <label>Title
+        <input id="title" type="text" maxlength="30" value="SUNSET HEIST">
+      </label>
+      <label>Subtitle — neon script
+        <input id="subtitle" type="text" maxlength="40" value="vice city nights">
+      </label>
+      <label>Badge ribbon
+        <input id="badge" type="text" maxlength="18" value="EST. 2026">
+      </label>
+      <div class="heat-row">
+        <span>Heat</span>
+        <div id="heat" class="heat" role="group" aria-label="Heat meter"></div>
+      </div>
+    </section>
+
+    <section class="group">
+      <h2>5 · Export PNG</h2>
+      <div id="sizes" class="sizes"></div>
+      <button id="export" type="button" class="primary">Export this size</button>
+      <button id="export-all" type="button" class="primary all">Export all four sizes</button>
+      <p id="status" role="status"></p>
+    </section>
+  </aside>
 </main>
+
+<footer class="foot">
+  <p>Lettering: <strong>Anton</strong>, <strong>Pacifico</strong> and <strong>Inter</strong> — all under the SIL Open Font License 1.1, texts in <a href="fonts/OFL-Anton.txt">OFL-Anton.txt</a>, <a href="fonts/OFL-Pacifico.txt">OFL-Pacifico.txt</a> and <a href="fonts/OFL-Inter.txt">OFL-Inter.txt</a>. No Rockstar artwork, logos or fonts are used anywhere in this app. Sample photos were made with an image model for make.fun and are free to use.</p>
+</footer>
+
 <script type="module" src="./src/main.js"></script>
 </body>
 </html>
